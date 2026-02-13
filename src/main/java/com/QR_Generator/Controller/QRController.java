@@ -1,5 +1,7 @@
 package com.QR_Generator.Controller;
 
+import com.QR_Generator.QRLogic.ModelSwitcher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
