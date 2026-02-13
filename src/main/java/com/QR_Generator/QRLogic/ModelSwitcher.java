@@ -28,8 +28,8 @@ public class ModelSwitcher {
         else return ByteMode;
     }
 
-
-    // here we make mode Indicator step 2
+    ErrorCorrectionLevel level = ErrorCorrectionLevel.M;
+    // here we return fix all bit
     public String getModeIndicator(EncodingMode mode){
         if(mode == NumericMode) return "0001";
         else if(mode == AlphaNumericMode) return "0010";
@@ -37,15 +37,16 @@ public class ModelSwitcher {
     }
 
     public String getCharacterCountBinary(String text, EncodingMode mode){
+
         int length = text.length();
         String binary = Integer.toBinaryString(length);
 
         int requiredBits = 0;
 
-        if(mode == NumericMode){
+        if(mode == EncodingMode.NumericMode){
             requiredBits = 10;
         }
-        else if(mode == AlphaNumericMode){
+        else if(mode == EncodingMode.AlphaNumericMode){
             requiredBits = 9;
         }
         else{
