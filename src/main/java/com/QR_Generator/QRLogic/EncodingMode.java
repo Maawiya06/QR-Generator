@@ -6,3 +6,4 @@ public enum EncodingMode {
     AlphaNumericMode,
     ByteMode;
 }
+

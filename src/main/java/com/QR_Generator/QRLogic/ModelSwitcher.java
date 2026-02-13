@@ -27,4 +27,36 @@ public class ModelSwitcher {
         else if(isAlphaNumeric) return AlphaNumericMode;
         else return ByteMode;
     }
+
+
+    // here we make mode Indicator step 2
+    public String getModeIndicator(EncodingMode mode){
+        if(mode == NumericMode) return "0001";
+        else if(mode == AlphaNumericMode) return "0010";
+        else return "0100";
+    }
+
+    public String getCharacterCountBinary(String text, EncodingMode mode){
+        int length = text.length();
+        String binary = Integer.toBinaryString(length);
+
+        int requiredBits = 0;
+
+        if(mode == NumericMode){
+            requiredBits = 10;
+        }
+        else if(mode == AlphaNumericMode){
+            requiredBits = 9;
+        }
+        else{
+            requiredBits = 8;
+        }
+
+        // left padding
+        while(binary.length() < requiredBits){
+            binary = "0" + binary;
+        }
+
+        return binary;
+    }
 }
