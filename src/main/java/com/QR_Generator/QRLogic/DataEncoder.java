@@ -25,7 +25,7 @@ public class DataEncoder {
     }
 
 
-    public String BitStreamBuilder(String text){
+    public String bitStreamBuilder(String text){
         ModelSwitcher detector = new ModelSwitcher();
         EncodingMode mode = detector.DetectionMode(text);
 
