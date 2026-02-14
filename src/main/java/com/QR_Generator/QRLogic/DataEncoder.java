@@ -1,5 +1,7 @@
 package com.QR_Generator.QRLogic;
 
+import java.awt.*;
+
 import static java.awt.SystemColor.text;
 
 public class DataEncoder {
@@ -29,14 +31,29 @@ public class DataEncoder {
         ModelSwitcher detector = new ModelSwitcher();
         EncodingMode mode = detector.DetectionMode(text);
 
-        String modebits = detector.getModeIndicator(mode);
+        String modebits =detector.getModeIndicator(mode);
         String chartobinary = detector.getCharacterCountBinary(text, mode);
 
         DataEncoder dataEncoder = new DataEncoder();
         String encode = dataEncoder.encodeData(text, mode);
 
         String finalbits = modebits + chartobinary + encode;
-        return finalbits;
+
+        StringBuilder bits = new StringBuilder(finalbits);
+        bits.append("0000");
+
+        if(Integer.parseInt(String.valueOf(bits)) % 8 == 0){
+            return String.valueOf(bits);
+        }
+        else{
+            bits.append("0000");
+        }
+        return String.valueOf(bits);
     }
 
+    public static void main(String[] args){
+        DataEncoder data = new DataEncoder();
+        String str = data.bitStreamBuilder("Hello World");
+        System.out.println(str.length());
+    }
 }
