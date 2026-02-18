@@ -42,13 +42,22 @@ public class DataEncoder {
         StringBuilder bits = new StringBuilder(finalbits);
         bits.append("0000");
 
-        if(Integer.parseInt(String.valueOf(bits)) % 8 == 0){
-            return String.valueOf(bits);
+        while(bits.length() % 8 != 0){
+            bits.append("0");
         }
-        else{
-            bits.append("0000");
+
+        // pad until 512 bits
+        boolean flag = true;
+        while(bits.length() < 512){
+            if(flag){
+                bits.append("11101100");
+            }
+            else{
+                bits.append("00010001");
+            }
+            flag = !flag;
         }
-        return String.valueOf(bits);
+        return bits.toString();
     }
 
     public static void main(String[] args){

@@ -30,6 +30,7 @@ public class ModelSwitcher {
 
     // here we fix any one attribute from enum
     ErrorCorrectionLevel level = ErrorCorrectionLevel.M;
+
     // here we return fix all bit
     public String getModeIndicator(EncodingMode mode){
         if(mode == NumericMode) return "0001";
