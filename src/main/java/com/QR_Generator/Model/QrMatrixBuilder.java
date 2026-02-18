@@ -53,8 +53,8 @@ public class QrMatrixBuilder {
         }
     }
     public static void main(String args[]){
-        QrMatrixBuilder builder = new QrMatrixBuilder();
-        int[][] m = builder.buildMatrix();
-        builder.printQr(m);
+        QrMatrixBuilder qrMatrixBuilder = new QrMatrixBuilder();
+        int[][] m = qrMatrixBuilder.buildMatrix();
+        qrMatrixBuilder.printQr(m);
     }
 }
