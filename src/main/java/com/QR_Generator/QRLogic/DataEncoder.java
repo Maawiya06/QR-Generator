@@ -63,6 +63,6 @@ public class DataEncoder {
     public static void main(String[] args){
         DataEncoder data = new DataEncoder();
         String str = data.bitStreamBuilder("Hello World");
-        System.out.println(str.length());
+        System.out.println(str);
     }
 }
