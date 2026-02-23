@@ -22,6 +22,7 @@ public class QrMatrixBuilder {
             }
         }
     }
+
     public int[][] buildMatrix(){
         int size = 33;
         int[][] matrix = new int[size][size];
@@ -30,8 +31,13 @@ public class QrMatrixBuilder {
             Arrays.fill(matrix[i], -1);
         }
         placefinder(0, 0, matrix);
+        addSeparator(0, 0, matrix);
+
         placefinder(0, size - 7, matrix);
+        addSeparator(0, size - 7, matrix);
+
         placefinder(size - 7, 0, matrix);
+        addSeparator(size - 7, 0, matrix);
 
         return matrix;
     }
@@ -50,6 +56,20 @@ public class QrMatrixBuilder {
                 }
             }
             System.out.println();
+        }
+    }
+
+    // add separator
+    private void addSeparator(int startRow, int startCol, int[][] matrix){
+        for(int i = -1; i <= 7; i++){
+            for(int j = -1; j <= 7; j++){
+                int r = startRow + i;
+                int c = startCol + j;
+
+                if(r >= 0 && r < matrix.length && c >= 0 && c < matrix.length && matrix[r][c] == -1){
+                    matrix[r][c] = 0;
+                }
+            }
         }
     }
     public static void main(String args[]){
