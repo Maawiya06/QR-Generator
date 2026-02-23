@@ -40,13 +40,13 @@ public class QrMatrixBuilder {
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix.length; j++){
                 if(matrix[i][j] == 1){
-                    System.out.println("██");
+                    System.out.print("██");
                 }
                 else if(matrix[i][j] == 0){
-                    System.out.println(" ");
+                    System.out.print(" ");
                 }
                 else{
-                    System.out.println("..");
+                    System.out.print("..");
                 }
             }
             System.out.println();
