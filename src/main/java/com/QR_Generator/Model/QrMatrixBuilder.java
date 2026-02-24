@@ -65,11 +65,11 @@ public class QrMatrixBuilder {
                 // skip if border
                 if(r < 0 || r >= matrix.length || c < 0 || c >= matrix.length) continue;
                 // do not override the exist pattern
-                if(matrix[r][c] == -1) continue;
+                if(matrix[r][c] != -1) continue;
                 // outer border
                 if(i == -2 || i == 2 || j == -2 || j == 2) matrix[r][c] = 1;
                 // center
-                else if(i == 0 && j == 0) matrix[c][r] = 1;
+                else if(i == 0 && j == 0) matrix[r][c] = 1;
                 // inner
                 else matrix[r][c] = 0;
             }
