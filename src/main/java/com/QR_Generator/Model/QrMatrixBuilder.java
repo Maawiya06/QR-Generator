@@ -23,25 +23,6 @@ public class QrMatrixBuilder {
         }
     }
 
-    public int[][] buildMatrix(){
-        int size = 33;
-        int[][] matrix = new int[size][size];
-
-        for(int i = 0; i < size; i++){
-            Arrays.fill(matrix[i], -1);
-        }
-        placefinder(0, 0, matrix);
-        addSeparator(0, 0, matrix);
-
-        placefinder(0, size - 7, matrix);
-        addSeparator(0, size - 7, matrix);
-
-        placefinder(size - 7, 0, matrix);
-        addSeparator(size - 7, 0, matrix);
-
-        return matrix;
-    }
-
     public void printQr(int[][] matrix){
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix.length; j++){
@@ -52,7 +33,7 @@ public class QrMatrixBuilder {
                     System.out.print(" ");
                 }
                 else{
-                    System.out.print("..");
+                    System.out.print("#.");
                 }
             }
             System.out.println();
@@ -72,6 +53,50 @@ public class QrMatrixBuilder {
             }
         }
     }
+
+    // all Alignment
+    private void addAlignment(int centreRow, int centreCol, int[][] matrix){
+        for(int i = -2; i <= 2; i++){
+            for(int j = -2; j <= 2; j++){
+
+                int r = centreRow + i;
+                int c = centreCol + j;
+
+                // skip if border
+                if(r < 0 || r >= matrix.length || c < 0 || c >= matrix.length) continue;
+                // do not override the exist pattern
+                if(matrix[r][c] == -1) continue;
+                // outer border
+                if(i == -2 || i == 2 || j == -2 || j == 2) matrix[r][c] = 1;
+                // center
+                else if(i == 0 && j == 0) matrix[c][r] = 1;
+                // inner
+                else matrix[r][c] = 0;
+            }
+        }
+    }
+
+    public int[][] buildMatrix(){
+        int size = 33;
+        int[][] matrix = new int[size][size];
+
+        for(int i = 0; i < size; i++){
+            Arrays.fill(matrix[i], -1);
+        }
+        placefinder(0, 0, matrix);
+        addSeparator(0, 0, matrix);
+        addAlignment(26, 26, matrix);
+
+        placefinder(0, size - 7, matrix);
+        addSeparator(0, size - 7, matrix);
+        addAlignment(26, 26, matrix);
+
+        placefinder(size - 7, 0, matrix);
+        addSeparator(size - 7, 0, matrix);
+        addAlignment(26, 26, matrix);
+        return matrix;
+    }
+
     public static void main(String args[]){
         QrMatrixBuilder qrMatrixBuilder = new QrMatrixBuilder();
         int[][] m = qrMatrixBuilder.buildMatrix();
